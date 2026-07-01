@@ -1,0 +1,184 @@
+/* Inter font import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-bg-base: #020B18;
+  --color-bg-surface: #071525;
+  --color-bg-card: #0A1E35;
+  --color-primary: #0EA5E9;
+  --color-primary-dark: #0284C7;
+  --color-accent: #06D6A0;
+  --color-accent2: #38BDF8;
+  --color-text: #F0F9FF;
+  --color-muted: #7FB3D3;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Manrope', 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: #020B18;
+    color: #F0F9FF;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(14, 165, 233, 0.3);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #0EA5E9;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+/* ── Water ripple canvas background ── */
+@layer utilities {
+  .text-gradient-water {
+    background: linear-gradient(135deg, #38BDF8 0%, #06D6A0 50%, #0EA5E9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-blue {
+    background: linear-gradient(135deg, #60A5FA 0%, #38BDF8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Deep glass card — "underwater" */
+  .glass-water {
+    background: linear-gradient(135deg,
+      rgba(14, 165, 233, 0.08) 0%,
+      rgba(6, 182, 212, 0.04) 50%,
+      rgba(6, 214, 160, 0.06) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    border-top-color: rgba(56, 189, 248, 0.25);
+    border-left-color: rgba(56, 189, 248, 0.2);
+  }
+
+  .glass-water-hover {
+    transition: all 0.35s ease;
+  }
+
+  .glass-water-hover:hover {
+    background: linear-gradient(135deg,
+      rgba(14, 165, 233, 0.14) 0%,
+      rgba(6, 182, 212, 0.08) 50%,
+      rgba(6, 214, 160, 0.10) 100%);
+    border-color: rgba(56, 189, 248, 0.35);
+    box-shadow:
+      0 0 30px rgba(14, 165, 233, 0.12),
+      0 0 60px rgba(6, 214, 160, 0.06),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+    transform: translateY(-2px);
+  }
+
+  /* Glow effects */
+  .glow-cyan {
+    box-shadow:
+      0 0 20px rgba(6, 182, 212, 0.25),
+      0 0 60px rgba(6, 182, 212, 0.1);
+  }
+
+  .glow-blue {
+    box-shadow:
+      0 0 20px rgba(14, 165, 233, 0.3),
+      0 0 80px rgba(14, 165, 233, 0.12);
+  }
+
+  /* Animated water shimmer */
+  .water-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .water-shimmer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(56, 189, 248, 0.08) 50%,
+      transparent 60%
+    );
+    animation: shimmer 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  /* Floating water orbs */
+  .water-orb {
+    border-radius: 50%;
+    filter: blur(60px);
+    animation: float-orb 8s ease-in-out infinite;
+  }
+
+  /* Grid dots background */
+  .dot-grid {
+    background-image: radial-gradient(circle, rgba(56,189,248,0.12) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+/* ── Keyframes ── */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes float-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -30px) scale(1.05); }
+  66% { transform: translate(-15px, 20px) scale(0.95); }
+}
+
+@keyframes wave {
+  0% { transform: translateX(0) scaleY(1); }
+  50% { transform: translateX(-25%) scaleY(0.85); }
+  100% { transform: translateX(-50%) scaleY(1); }
+}
+
+@keyframes wave2 {
+  0% { transform: translateX(0) scaleY(1); }
+  50% { transform: translateX(-25%) scaleY(1.1); }
+  100% { transform: translateX(-50%) scaleY(1); }
+}
+
+@keyframes droplet {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  80% { transform: translateY(18px) scale(0.9); opacity: 0.8; }
+  100% { transform: translateY(20px) scale(1.4); opacity: 0; }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  70% { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes counter-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Wave SVG animation */
+.wave-anim { animation: wave 8s linear infinite; }
+.wave-anim-2 { animation: wave2 10s linear infinite; }
